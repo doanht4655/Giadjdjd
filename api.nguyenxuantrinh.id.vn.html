@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PyHydra - Công cụ obfuscate Python mạnh mẽ và bảo mật. Bảo vệ source code Python với công nghệ tiên tiến, hỗ trợ Anti-Debug và Anti-Crack.">
+    <meta name="keywords" content="python obfuscator, code protection, pyhydra, python security, anti-debug, anti-crack, source code protection">
+    <meta name="author" content="Nguyễn Xuân Trịnh">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="PyHydra - Advanced Python Code Obfuscator">
+    <meta property="og:description" content="Bảo vệ code Python của bạn với PyHydra - công cụ obfuscate mạnh mẽ nhất">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://raw.githubusercontent.com/nguyenxuantrinhnotpd/PyHydra/refs/heads/main/pyhydra.jpeg">
+    
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PyHydra - Python Code Protection">
+    <meta name="twitter:description" content="Advanced Python obfuscation with anti-debug and anti-crack features">
+    
+    <title>PyHydra - Advanced Python Code Obfuscator | Bảo vệ Source Code Python</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>🐍</text></svg>">
+    <link rel="alternate icon" href="https://raw.githubusercontent.com/nguyenxuantrinhnotpd/PyHydra/refs/heads/main/pyhydra.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/nguyenxuantrinhnotpd/PyHydra/refs/heads/main/pyhydra.jpeg">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="https://proxy.nguyenxuantrinh.id.vn/pyhydra.css">
+    
+    <!-- reCAPTCHA API -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeEc5YrAAAAAFW8gpTYgbDH-SCf3f6mLtB640pA"></script>
+    
+    <style>
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .lang-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .lang-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .lang-icon {
+            font-size: 16px;
+        }
+
+        /* Telegram Contact Button */
+        .telegram-contact {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #0088cc 0%, #229ed9 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .telegram-contact:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 136, 204, 0.4);
+            background: linear-gradient(135deg, #229ed9 0%, #0088cc 100%);
+            color: white;
+            text-decoration: none;
+        }
+
+        .telegram-contact:active {
+            transform: translateY(-1px);
+        }
+
+        .telegram-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            font-size: 16px;
+        }
+
+        .telegram-pulse {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50px;
+            background: rgba(0, 136, 204, 0.3);
+            animation: pulse 2s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            70% {
+                transform: scale(1.05);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 0;
+            }
+        }
+
+        /* Contact section in main content */
+        .contact-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .contact-title {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-description {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .contact-btn:hover::before {
+            left: 100%;
+        }
+
+        .contact-btn.telegram {
+            background: linear-gradient(135deg, #0088cc 0%, #229ed9 100%);
+            color: white;
+        }
+
+        .contact-btn.telegram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 136, 204, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-btn.github {
+            background: linear-gradient(135deg, #333 0%, #555 100%);
+            color: white;
+        }
+
+        .contact-btn.github:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(51, 51, 51, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* reCAPTCHA badge styling */
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+                padding: 6px;
+            }
+            
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .telegram-contact {
+                left: 10px;
+                top: 10px;
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .telegram-icon {
+                width: 20px;
+                height: 20px;
+                font-size: 14px;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .telegram-contact .telegram-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Telegram Contact Button -->
+    <a href="https://t.me/CalceIsMe" class="telegram-contact" target="_blank" rel="noopener noreferrer">
+        <div class="telegram-pulse"></div>
+        <div class="telegram-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+        </div>
+        <span class="telegram-text" data-key="contact_telegram">Contact Telegram</span>
+    </a>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="vi">
+            <span class="lang-icon">
+                <!-- Cờ Việt Nam (SVG) -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
+                    <rect width="640" height="480" fill="#da251d"/>
+                    <polygon fill="#ff0" points="320,120 347,215 440,215 365,270 392,365 320,305 248,365 275,270 200,215 293,215"/>
+                </svg>
+            </span>
+            <span>VI</span>
+        </button>
+        <button class="lang-btn" data-lang="en">
+            <span class="lang-icon">
+                <!-- Cờ Mỹ (SVG) -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 7410 3900">
+                    <rect width="7410" height="3900" fill="#b22234"/>
+                    <g fill="#fff">
+                        <path d="M0 300h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0z"/>
+                    </g>
+                    <rect width="2964" height="2100" fill="#3c3b6e"/>
+                    <g fill="#fff">
+                        <g id="s">
+                            <polygon points="247,90 263,144 321,144 275,180 291,234 247,198 203,234 219,180 173,144 231,144"/>
+                        </g>
+                        <use xlink:href="#s" x="0" y="0"/>
+                        <use xlink:href="#s" x="247" y="180"/>
+                        <use xlink:href="#s" x="494" y="0"/>
+                        <use xlink:href="#s" x="741" y="180"/>
+                    </g>
+                </svg>
+            </span>
+            <span>EN</span>
+        </button>
+    </div>
+
+    <div class="bg-animation">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <h1 class="logo-text">PyHydra</h1>
+            </div>
+            <p class="tagline" data-key="tagline">Advanced Python Code Protection & Obfuscation</p>
+            <div class="features-preview">
+                <div class="feature-badge" data-key="feature_antidebug" title="Debug Protection">Anti-Debug</div>
+                <div class="feature-badge" data-key="feature_anticrack" title="Crack Protection">Anti-Crack</div>
+                <div class="feature-badge" data-key="feature_performance" title="Optimized Performance">High Performance</div>
+                <div class="feature-badge" data-key="feature_security" title="Enterprise Security">Enterprise Security</div>
+            </div>
+        </header>
+        <main class="form-container">
+        
+            <div class="result-container result-success">
+                <label data-key="label_users"><span class="icon user-icon"></span> Số người dùng</label><p><strong> 131</strong></p>
+            </div>
+        
+            <form method="POST" enctype="multipart/form-data" id="obfuscatorForm">
+                <input type="hidden" name="recaptcha_token" id="recaptchaToken">
+                
+                <div class="form-group">
+                    <label data-key="label_username"><span class="icon user-icon"></span> Tên người dùng:</label>
+                    <input type="text" name="username" class="form-control" data-key="placeholder_username" placeholder="Nhập tên của bạn" required>
+                </div>
+
+                <div class="form-group">
+                    <label data-key="label_python_version"><span class="icon python-icon"></span> Phiên bản Python:</label>
+                    <select name="python_version" class="form-control">
+                        <option value="3.10">Python 3.10</option>
+                        <option value="3.11">Python 3.11</option>
+                        <option value="3.12">Python 3.12</option>
+                        <option value="3.13">Python 3.13</option>
+                        <option value="3.14">Python 3.14</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="antidebug">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <strong data-key="antidebug_title">Anti-Debug Protection</strong>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px;" data-key="antidebug_desc">
+                                Ngăn chặn debugging và reverse engineering. (Chỉ Dùng Cho Code Main)
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="anticrack">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <strong data-key="anticrack_title">Anti-Crack + Requests Protection</strong>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px;" data-key="anticrack_desc">
+                                Bảo vệ khỏi cracking và requests debugging như HTTP-TOOLKIT
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label data-key="label_file"><span class="icon file-icon"></span> File Python (.py):</label>
+                    <div class="file-upload">
+                        <input type="file" name="file" accept=".py" required id="fileInput">
+                        <label for="fileInput" class="file-upload-label">
+                            <div class="upload-icon"></div>
+                            <div class="upload-text" data-key="upload_text">Chọn file Python để bảo vệ</div>
+                            <div class="upload-hint" data-key="upload_hint">Hỗ trợ file .py (Max 10MB)</div>
+                        </label>
+                        <div class="file-name" id="fileName" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary g-recaptcha" 
+                    data-sitekey="6LeEc5YrAAAAAFW8gpTYgbDH-SCf3f6mLtB640pA" 
+                    data-callback="onSubmit" 
+                    data-action="submit"
+                    data-key="submit_btn">
+                    Bắt đầu bảo vệ code
+                </button>
+            </form>
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <div class="loading-text" data-key="loading_text">Đang xử lý và bảo vệ code của bạn...</div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Translation data
+        const translations = {
+            vi: {
+                tagline: "Advanced Python Code Protection & Obfuscation",
+                feature_antidebug: "Anti-Debug",
+                feature_anticrack: "Anti-Crack", 
+                feature_performance: "High Performance",
+                feature_security: "Enterprise Security",
+                label_users: "Số người dùng:",
+                label_username: "Tên người dùng:",
+                placeholder_username: "Nhập tên của bạn",
+                label_python_version: "Phiên bản Python:",
+                antidebug_title: "Anti-Debug Protection",
+                antidebug_desc: "Ngăn chặn debugging và reverse engineering. (Chỉ Dùng Cho Code Main)",
+                anticrack_title: "Anti-Crack + Requests Protection",
+                anticrack_desc: "Bảo vệ khỏi cracking và requests debugging như HTTP-TOOLKIT",
+                label_file: "File Python (.py):",
+                upload_text: "Chọn file Python để bảo vệ",
+                upload_hint: "Hỗ trợ file .py (Max 10MB)",
+                submit_btn: "Bắt đầu bảo vệ code",
+                loading_text: "Đang xử lý và bảo vệ code của bạn...",
+                processing_btn: "Đang xử lý...",
+                notification_ready: "PyHydra đã sẵn sàng để bảo vệ code của bạn!",
+                notification_file_uploaded: "File đã được tải lên thành công!",
+                notification_file_downloaded: "File đã được tải xuống thành công!",
+                error_username: "Vui lòng nhập tên người dùng",
+                error_file: "Vui lòng chọn file Python",
+                error_file_type: "Chỉ hỗ trợ file .py",
+                error_file_size: "File quá lớn (Max 10MB)",
+                error_general: "Đã xảy ra lỗi. Vui lòng thử lại.",
+                error_recaptcha: "Xác thực reCAPTCHA không thành công. Vui lòng thử lại.",
+                tooltip_antidebug: "Ngăn chặn việc debug và phân tích code",
+                tooltip_anticrack: "Bảo vệ khỏi việc crack và reverse engineering",
+                tooltip_performance: "Tối ưu hiệu suất, ít ảnh hưởng tốc độ",
+                tooltip_security: "Bảo mật cấp doanh nghiệp cho code quan trọng"
+            },
+            en: {
+                tagline: "Advanced Python Code Protection & Obfuscation",
+                feature_antidebug: "Anti-Debug",
+                feature_anticrack: "Anti-Crack",
+                feature_performance: "High Performance", 
+                feature_security: "Enterprise Security",
+                label_users: "Users:",
+                label_username: "Username:",
+                placeholder_username: "Enter your name",
+                label_python_version: "Python Version:",
+                antidebug_title: "Anti-Debug Protection",
+                antidebug_desc: "Prevent debugging and reverse engineering. (For Main Code Only)",
+                anticrack_title: "Anti-Crack + Requests Protection",
+                anticrack_desc: "Protect against cracking and requests debugging like HTTP-TOOLKIT",
+                label_file: "Python File (.py):",
+                upload_text: "Choose Python file to protect",
+                upload_hint: "Supports .py files (Max 10MB)",
+                submit_btn: "Start protecting code",
+                loading_text: "Processing and protecting your code...",
+                processing_btn: "Processing...",
+                notification_ready: "PyHydra is ready to protect your code!",
+                notification_file_uploaded: "File uploaded successfully!",
+                notification_file_downloaded: "File downloaded successfully!",
+                error_username: "Please enter username",
+                error_file: "Please select Python file",
+                error_file_type: "Only .py files supported",
+                error_file_size: "File too large (Max 10MB)",
+                error_general: "An error occurred. Please try again.",
+                error_recaptcha: "reCAPTCHA verification failed. Please try again.",
+                tooltip_antidebug: "Prevent debugging and code analysis",
+                tooltip_anticrack: "Protect against cracking and reverse engineering",
+                tooltip_performance: "Optimized performance with minimal speed impact",
+                tooltip_security: "Enterprise-grade security for critical code"
+            }
+        };
+
+        // Current language
+        let currentLang = localStorage.getItem('pyhydra_language') || 'vi';
+
+        // reCAPTCHA handling
+        function onSubmit(token) {
+            // Set the token in the hidden input
+            document.getElementById('recaptchaToken').value = token;
+            
+            // Submit the form
+            document.getElementById('obfuscatorForm').submit();
+        }
+
+        // Initialize reCAPTCHA on form submit
+        document.getElementById('obfuscatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return false;
+            }
+            
+            const loading = document.getElementById('loading');
+            const submitBtn = e.target.querySelector('.btn-primary');
+            
+            // Show loading state
+            loading.style.display = 'block';
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = translations[currentLang].processing_btn;
+            
+            // Execute reCAPTCHA
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LeEc5YrAAAAAFW8gpTYgbDH-SCf3f6mLtB640pA', {action: 'submit'}).then(function(token) {
+                    // Set the token and submit the form
+                    document.getElementById('recaptchaToken').value = token;
+                    document.getElementById('obfuscatorForm').submit();
+                }).catch(function(error) {
+                    // Handle reCAPTCHA error
+                    console.error('reCAPTCHA error:', error);
+                    showNotification(translations[currentLang].error_recaptcha, 'error');
+                    
+                    // Reset form state
+                    loading.style.display = 'none';
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = translations[currentLang].submit_btn;
+                });
+            });
+        });
+
+        // Language switching functionality
+        function switchLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('pyhydra_language', lang);
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    if (element.tagName === 'INPUT' && element.type === 'text') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update meta tags
+            updateMetaTags(lang);
+            
+            // Show language change notification
+            const message = lang === 'vi' ? 
+                'Đã chuyển sang tiếng Việt' : 
+                'Switched to English';
+            showNotification(message, 'success');
+        }
+
+        // Update meta tags based on language
+        function updateMetaTags(lang) {
+            const metaDesc = document.querySelector('meta[name="description"]');
+            const title = document.querySelector('title');
+            
+            if (lang === 'en') {
+                metaDesc.content = "PyHydra - Advanced Python Code Obfuscator and Protection Tool. Secure your Python source code with advanced technology, Anti-Debug and Anti-Crack features.";
+                title.textContent = "PyHydra - Advanced Python Code Obfuscator | Python Source Code Protection";
+            } else {
+                metaDesc.content = "PyHydra - Công cụ obfuscate Python mạnh mẽ và bảo mật. Bảo vệ source code Python với công nghệ tiên tiến, hỗ trợ Anti-Debug và Anti-Crack.";
+                title.textContent = "PyHydra - Advanced Python Code Obfuscator | Bảo vệ Source Code Python";
+            }
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            switchLanguage(currentLang);
+            
+            // Add event listeners to language buttons
+            document.querySelectorAll('.lang-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    switchLanguage(lang);
+                });
+            });
+            
+            // Initialize reCAPTCHA
+            grecaptcha.ready(function() {
+                console.log('reCAPTCHA ready');
+            });
+        });
+
+        // File upload handler
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const fileNameDisplay = document.getElementById('fileName');
+            
+            if (file) {
+                const fileSize = (file.size / 1024 / 1024).toFixed(2);
+                fileNameDisplay.innerHTML = `<span class="success-icon"></span> <strong>${file.name}</strong> (${fileSize} MB)`;
+                fileNameDisplay.style.display = 'inline-block';
+                
+                // Add success animation
+                fileNameDisplay.style.animation = 'fadeIn 0.5s ease-out';
+                
+                // Show success notification
+                showNotification(translations[currentLang].notification_file_uploaded, 'success');
+            } else {
+                fileNameDisplay.style.display = 'none';
+            }
+        });
+
+        // Download obfuscated file function
+        function downloadObfuscatedFile(code, originalFileName) {
+            const fileName = `pyhydra-${originalFileName}`;
+            const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            
+            a.href = url;
+            a.download = fileName;
+            a.style.display = 'none';
+            
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            // Show success notification
+            showNotification(translations[currentLang].notification_file_downloaded, 'success');
+        }
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            let gradient = 'var(--primary-gradient)';
+            
+            switch(type) {
+                case 'success':
+                    gradient = 'var(--success-gradient)';
+                    break;
+                case 'error':
+                    gradient = 'var(--danger-gradient)';
+                    break;
+                case 'warning':
+                    gradient = 'linear-gradient(135deg, #ffa726 0%, #ffcc02 100%)';
+                    break;
+            }
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: ${gradient};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 12px;
+                font-weight: 600;
+                z-index: 999;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                animation: slideIn 0.3s ease-out;
+                max-width: 350px;
+                word-wrap: break-word;
+            `;
+            notification.innerHTML = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-out forwards';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 4000);
+        }
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes slideUp {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Enhanced form interactions
+        document.querySelectorAll('.form-control').forEach(element => {
+            element.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+                this.parentElement.style.transition = 'transform 0.3s ease';
+            });
+            
+            element.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Checkbox animations
+        document.querySelectorAll('.checkbox-container').forEach(container => {
+            container.addEventListener('click', function() {
+                const checkbox = this.querySelector('input[type="checkbox"]');
+                const customCheckbox = this.querySelector('.checkbox-custom');
+                
+                if (checkbox.checked) {
+                    customCheckbox.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        customCheckbox.style.transform = 'scale(1)';
+                    }, 150);
+                }
+            });
+        });
+
+        // Form validation enhancement
+        function validateForm() {
+            const username = document.querySelector('input[name="username"]').value.trim();
+            const fileInput = document.querySelector('input[name="file"]');
+            
+            if (!username) {
+                showNotification(translations[currentLang].error_username, 'error');
+                return false;
+            }
+            
+            if (!fileInput.files.length) {
+                showNotification(translations[currentLang].error_file, 'error');
+                return false;
+            }
+            
+            const file = fileInput.files[0];
+            if (!file.name.endsWith('.py')) {
+                showNotification(translations[currentLang].error_file_type, 'error');
+                return false;
+            }
+            
+            if (file.size > 10 * 1024 * 1024) { // 10MB limit
+                showNotification(translations[currentLang].error_file_size, 'error');
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Drag and drop functionality for file upload
+        const fileUploadLabel = document.querySelector('.file-upload-label');
+        const fileInput = document.getElementById('fileInput');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            fileUploadLabel.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileUploadLabel.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileUploadLabel.addEventListener(eventName, unhighlight, false);
+        });
+
+        fileUploadLabel.addEventListener('drop', handleDrop, false);
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function highlight(e) {
+            fileUploadLabel.style.background = 'rgba(102, 126, 234, 0.2)';
+            fileUploadLabel.style.borderColor = 'rgba(102, 126, 234, 1)';
+            fileUploadLabel.style.transform = 'scale(1.02)';
+        }
+
+        function unhighlight(e) {
+            fileUploadLabel.style.background = 'rgba(255, 255, 255, 0.03)';
+            fileUploadLabel.style.borderColor = 'rgba(102, 126, 234, 0.5)';
+            fileUploadLabel.style.transform = 'scale(1)';
+        }
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+
+            if (files.length > 0) {
+                const file = files[0];
+                if (file.name.endsWith('.py')) {
+                    fileInput.files = files;
+                    fileInput.dispatchEvent(new Event('change'));
+                } else {
+                    showNotification(translations[currentLang].error_file_type, 'error');
+                }
+            }
+        }
+
+        // Add tooltips for features based on current language
+        function updateTooltips() {
+            const tooltipKeys = {
+                'Anti-Debug': 'tooltip_antidebug',
+                'Anti-Crack': 'tooltip_anticrack', 
+                'High Performance': 'tooltip_performance',
+                'Enterprise Security': 'tooltip_security'
+            };
+
+            document.querySelectorAll('.feature-badge').forEach(badge => {
+                const text = badge.textContent.trim();
+                const tooltipKey = tooltipKeys[text];
+                if (tooltipKey && translations[currentLang][tooltipKey]) {
+                    badge.title = translations[currentLang][tooltipKey];
+                    badge.style.cursor = 'help';
+                }
+            });
+        }
+
+        // Progressive Web App features
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed');
+                    });
+            });
+        }
+
+        // Error handling for form submission
+        window.addEventListener('error', function(e) {
+            console.error('PyHydra Error:', e.error);
+            // showNotification(translations[currentLang].error_general, 'error');
+        });
+
+        // Initialize all features when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add loading animation to initial elements
+            document.querySelectorAll('.form-group').forEach((group, index) => {
+                group.style.animation = `slideUp 0.6s ease-out ${index * 0.1}s both`;
+            });
+
+            // Add focus trap for accessibility
+            const focusableElements = document.querySelectorAll(
+                'button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            
+            if (focusableElements.length > 0) {
+                focusableElements[0].focus();
+            }
+
+            // Update tooltips
+            updateTooltips();
+
+            console.log('PyHydra initialized successfully');
+            
+            // Show ready notification after language is set
+            setTimeout(() => {
+                showNotification(translations[currentLang].notification_ready, 'success');
+            }, 500);
+        });
+
+        // Update tooltips when language changes
+        document.addEventListener('languageChanged', updateTooltips);
+    </script>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "PyHydra",
+        "description": "Advanced Python Code Obfuscator and Protection Tool",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "inLanguage": ["vi", "en"],
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Bóng x"
+        },
+        "datePublished": "2024",
+        "softwareVersion": "1.0",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "150"
+        }
+    }
+    </script>
+</body>
+</html>0
