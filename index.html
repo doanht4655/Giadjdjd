@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bóng X - Công cụ bảo vệ code Python chuyên nghiệp. Obfuscate và bảo mật source code Python với công nghệ AI tiên tiến.">
+    <meta name="keywords" content="bóng x, python obfuscator, code protection, python security, anti-debug, anti-crack, source code protection, ai obfuscation">
+    <meta name="author" content="Bóng X Team">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Bóng X - AI-Powered Python Code Protection">
+    <meta property="og:description" content="Bảo vệ code Python của bạn với Bóng X - công cụ AI obfuscation thế hệ mới">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://raw.githubusercontent.com/nguyenxuantrinhnotpd/PyHydra/refs/heads/main/pyhydra.jpeg">
+    
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bóng X - AI Python Code Protection">
+    <meta name="twitter:description" content="Advanced AI-powered Python obfuscation with next-gen security features">
+    
+    <title>Bóng X - AI-Powered Python Code Protection | Bảo vệ Source Code với AI</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>⚽</text></svg>">
+    <link rel="alternate icon" href="https://raw.githubusercontent.com/nguyenxuantrinhnotpd/PyHydra/refs/heads/main/pyhydra.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/nguyenxuantrinhnotpd/PyHydra/refs/heads/main/pyhydra.jpeg">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="https://proxy.nguyenxuantrinh.id.vn/pyhydra.css">
+    
+    <!-- reCAPTCHA API -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeEc5YrAAAAAFW8gpTYgbDH-SCf3f6mLtB640pA"></script>
+    
+    <style>
+        /* Bóng X Brand Colors & Modern Design */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --brand-gradient: linear-gradient(135deg, #ff6b6b 0%, #ffa726 50%, #42a5f5 100%);
+            --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --bg-primary: #0a0e27;
+            --bg-secondary: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 107, 107, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(66, 165, 245, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 167, 38, 0.2) 0%, transparent 50%);
+            z-index: -1;
+            animation: gradientShift 15s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .lang-btn {
+            padding: 10px 18px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .lang-btn.active {
+            background: var(--brand-gradient);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+        }
+        
+        .lang-icon {
+            font-size: 18px;
+        }
+
+        /* Modern Telegram Contact Button */
+        .telegram-contact {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--brand-gradient);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .telegram-contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .telegram-contact:hover::before {
+            left: 100%;
+        }
+
+        .telegram-contact:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+            color: white;
+            text-decoration: none;
+        }
+
+        .telegram-contact:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .telegram-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            font-size: 18px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-5px); }
+            60% { transform: translateY(-3px); }
+        }
+
+        .telegram-pulse {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50px;
+            background: rgba(255, 107, 107, 0.3);
+            animation: pulse 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            70% {
+                transform: scale(1.08);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1.15);
+                opacity: 0;
+            }
+        }
+
+        /* Modern Contact Section */
+        .contact-section {
+            margin-top: 50px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--brand-gradient);
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .contact-title {
+            color: var(--text-primary);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .contact-description {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .contact-btn:hover::before {
+            left: 100%;
+        }
+
+        .contact-btn.telegram {
+            background: var(--brand-gradient);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .contact-btn.telegram:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.6);
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-btn.github {
+            background: linear-gradient(135deg, #24292e 0%, #40464e 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(36, 41, 46, 0.4);
+        }
+
+        .contact-btn.github:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(36, 41, 46, 0.6);
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* reCAPTCHA badge styling */
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+
+        /* Additional styles for external CSS elements */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            font-size: 3rem;
+            filter: drop-shadow(0 4px 20px rgba(255, 107, 107, 0.3));
+        }
+
+        .logo-text {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .features-preview {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .feature-badge {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-badge:hover {
+            background: var(--brand-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: rgba(255, 107, 107, 0.8);
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-container:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .checkbox-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 6px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked + .checkbox-custom {
+            background: var(--brand-gradient);
+            border-color: transparent;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked + .checkbox-custom::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .file-upload {
+            position: relative;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 30px;
+            border: 3px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .file-upload-label:hover {
+            border-color: rgba(255, 107, 107, 0.8);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .upload-icon::before {
+            content: '📁';
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .upload-text {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .upload-hint {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .file-name {
+            margin-top: 15px;
+            padding: 10px;
+            background: var(--success-gradient);
+            color: white;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 18px;
+            background: var(--brand-gradient);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.6);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .result-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .result-success {
+            border-color: rgba(79, 172, 254, 0.6);
+            background: rgba(79, 172, 254, 0.1);
+        }
+
+        .icon {
+            margin-right: 8px;
+        }
+
+        .user-icon::before {
+            content: '👤';
+        }
+
+        .python-icon::before {
+            content: '🐍';
+        }
+
+        .file-icon::before {
+            content: '📄';
+        }
+
+        .success-icon::before {
+            content: '✅';
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 50%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+                padding: 6px;
+            }
+            
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .telegram-contact {
+                left: 10px;
+                top: 10px;
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .telegram-icon {
+                width: 20px;
+                height: 20px;
+                font-size: 14px;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .telegram-contact .telegram-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Telegram Contact Button -->
+    <a href="https://t.me/CalceIsMe" class="telegram-contact" target="_blank" rel="noopener noreferrer">
+        <div class="telegram-pulse"></div>
+        <div class="telegram-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+        </div>
+        <span class="telegram-text" data-key="contact_telegram">Contact Telegram</span>
+    </a>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="vi">
+            <span class="lang-icon">
+                <!-- Cờ Việt Nam (SVG) -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
+                    <rect width="640" height="480" fill="#da251d"/>
+                    <polygon fill="#ff0" points="320,120 347,215 440,215 365,270 392,365 320,305 248,365 275,270 200,215 293,215"/>
+                </svg>
+            </span>
+            <span>VI</span>
+        </button>
+        <button class="lang-btn" data-lang="en">
+            <span class="lang-icon">
+                <!-- Cờ Mỹ (SVG) -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 7410 3900">
+                    <rect width="7410" height="3900" fill="#b22234"/>
+                    <g fill="#fff">
+                        <path d="M0 300h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0z"/>
+                    </g>
+                    <rect width="2964" height="2100" fill="#3c3b6e"/>
+                    <g fill="#fff">
+                        <g id="s">
+                            <polygon points="247,90 263,144 321,144 275,180 291,234 247,198 203,234 219,180 173,144 231,144"/>
+                        </g>
+                        <use xlink:href="#s" x="0" y="0"/>
+                        <use xlink:href="#s" x="247" y="180"/>
+                        <use xlink:href="#s" x="494" y="0"/>
+                        <use xlink:href="#s" x="741" y="180"/>
+                    </g>
+                </svg>
+            </span>
+            <span>EN</span>
+        </button>
+    </div>
+
+    <div class="bg-animation">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">⚽</div>
+                <h1 class="logo-text">Bóng X</h1>
+            </div>
+            <p class="tagline" data-key="tagline">AI-Powered Python Code Protection & Advanced Obfuscation</p>
+            <div class="features-preview">
+                <div class="feature-badge" data-key="feature_ai" title="AI Protection">AI-Powered</div>
+                <div class="feature-badge" data-key="feature_antidebug" title="Debug Protection">Anti-Debug</div>
+                <div class="feature-badge" data-key="feature_anticrack" title="Crack Protection">Anti-Crack</div>
+                <div class="feature-badge" data-key="feature_neural" title="Neural Network">Neural Guard</div>
+                <div class="feature-badge" data-key="feature_security" title="Enterprise Security">Enterprise Security</div>
+            </div>
+        </header>
+        <main class="form-container">
+        
+            <div class="result-container result-success">
+                <label data-key="label_users"><span class="icon user-icon"></span> Số người dùng</label><p><strong> 131</strong></p>
+            </div>
+        
+            <form method="POST" enctype="multipart/form-data" id="obfuscatorForm">
+                <input type="hidden" name="recaptcha_token" id="recaptchaToken">
+                
+                <div class="form-group">
+                    <label data-key="label_username"><span class="icon user-icon"></span> Tên người dùng:</label>
+                    <input type="text" name="username" class="form-control" data-key="placeholder_username" placeholder="Nhập tên của bạn" required>
+                </div>
+
+                <div class="form-group">
+                    <label data-key="label_python_version"><span class="icon python-icon"></span> Phiên bản Python:</label>
+                    <select name="python_version" class="form-control">
+                        <option value="3.10">Python 3.10</option>
+                        <option value="3.11">Python 3.11</option>
+                        <option value="3.12">Python 3.12</option>
+                        <option value="3.13">Python 3.13</option>
+                        <option value="3.14">Python 3.14</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="antidebug">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <strong data-key="antidebug_title">Anti-Debug Protection</strong>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px;" data-key="antidebug_desc">
+                                Ngăn chặn debugging và reverse engineering. (Chỉ Dùng Cho Code Main)
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="anticrack">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <strong data-key="anticrack_title">Anti-Crack + Requests Protection</strong>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px;" data-key="anticrack_desc">
+                                Bảo vệ khỏi cracking và requests debugging như HTTP-TOOLKIT
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label data-key="label_file"><span class="icon file-icon"></span> File Python (.py):</label>
+                    <div class="file-upload">
+                        <input type="file" name="file" accept=".py" required id="fileInput">
+                        <label for="fileInput" class="file-upload-label">
+                            <div class="upload-icon"></div>
+                            <div class="upload-text" data-key="upload_text">Chọn file Python để bảo vệ</div>
+                            <div class="upload-hint" data-key="upload_hint">Hỗ trợ file .py (Max 10MB)</div>
+                        </label>
+                        <div class="file-name" id="fileName" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary g-recaptcha" 
+                    data-sitekey="6LeEc5YrAAAAAFW8gpTYgbDH-SCf3f6mLtB640pA" 
+                    data-callback="onSubmit" 
+                    data-action="submit"
+                    data-key="submit_btn">
+                    Bắt đầu bảo vệ code
+                </button>
+            </form>
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <div class="loading-text" data-key="loading_text">Đang xử lý và bảo vệ code của bạn...</div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Translation data
+        const translations = {
+            vi: {
+                tagline: "AI-Powered Python Code Protection & Advanced Obfuscation",
+                feature_ai: "AI-Powered",
+                feature_antidebug: "Anti-Debug",
+                feature_anticrack: "Anti-Crack", 
+                feature_neural: "Neural Guard",
+                feature_security: "Enterprise Security",
+                label_users: "Số người dùng:",
+                label_username: "Tên người dùng:",
+                placeholder_username: "Nhập tên của bạn",
+                label_python_version: "Phiên bản Python:",
+                antidebug_title: "Anti-Debug Protection",
+                antidebug_desc: "Ngăn chặn debugging và reverse engineering. (Chỉ Dùng Cho Code Main)",
+                anticrack_title: "Anti-Crack + Requests Protection",
+                anticrack_desc: "Bảo vệ khỏi cracking và requests debugging như HTTP-TOOLKIT",
+                label_file: "File Python (.py):",
+                upload_text: "Chọn file Python để bảo vệ với AI",
+                upload_hint: "Hỗ trợ file .py (Max 10MB) - AI sẽ tối ưu bảo mật",
+                submit_btn: "Bắt đầu bảo vệ với Bóng X AI",
+                loading_text: "AI đang phân tích và bảo vệ code của bạn...",
+                processing_btn: "AI đang xử lý...",
+                notification_ready: "Bóng X AI đã sẵn sàng để bảo vệ code của bạn!",
+                notification_file_uploaded: "File đã được tải lên thành công!",
+                notification_file_downloaded: "File đã được bảo vệ và tải xuống thành công!",
+                error_username: "Vui lòng nhập tên người dùng",
+                error_file: "Vui lòng chọn file Python",
+                error_file_type: "Chỉ hỗ trợ file .py",
+                error_file_size: "File quá lớn (Max 10MB)",
+                error_general: "Đã xảy ra lỗi. Vui lòng thử lại.",
+                error_recaptcha: "Xác thực reCAPTCHA không thành công. Vui lòng thử lại.",
+                tooltip_ai: "Bảo vệ code bằng công nghệ AI tiên tiến",
+                tooltip_antidebug: "Ngăn chặn việc debug và phân tích code",
+                tooltip_anticrack: "Bảo vệ khỏi việc crack và reverse engineering",
+                tooltip_neural: "Sử dụng mạng neural để tối ưu bảo mật",
+                tooltip_security: "Bảo mật cấp doanh nghiệp cho code quan trọng"
+            },
+            en: {
+                tagline: "AI-Powered Python Code Protection & Advanced Obfuscation",
+                feature_ai: "AI-Powered",
+                feature_antidebug: "Anti-Debug",
+                feature_anticrack: "Anti-Crack",
+                feature_neural: "Neural Guard", 
+                feature_security: "Enterprise Security",
+                label_users: "Users:",
+                label_username: "Username:",
+                placeholder_username: "Enter your name",
+                label_python_version: "Python Version:",
+                antidebug_title: "Anti-Debug Protection",
+                antidebug_desc: "Prevent debugging and reverse engineering. (For Main Code Only)",
+                anticrack_title: "Anti-Crack + Requests Protection",
+                anticrack_desc: "Protect against cracking and requests debugging like HTTP-TOOLKIT",
+                label_file: "Python File (.py):",
+                upload_text: "Choose Python file to protect with AI",
+                upload_hint: "Supports .py files (Max 10MB) - AI will optimize security",
+                submit_btn: "Start protecting with Bóng X AI",
+                loading_text: "AI is analyzing and protecting your code...",
+                processing_btn: "AI processing...",
+                notification_ready: "Bóng X AI is ready to protect your code!",
+                notification_file_uploaded: "File uploaded successfully!",
+                notification_file_downloaded: "File protected and downloaded successfully!",
+                error_username: "Please enter username",
+                error_file: "Please select Python file",
+                error_file_type: "Only .py files supported",
+                error_file_size: "File too large (Max 10MB)",
+                error_general: "An error occurred. Please try again.",
+                error_recaptcha: "reCAPTCHA verification failed. Please try again.",
+                tooltip_ai: "Protect code with advanced AI technology",
+                tooltip_antidebug: "Prevent debugging and code analysis",
+                tooltip_anticrack: "Protect against cracking and reverse engineering",
+                tooltip_neural: "Use neural networks to optimize security",
+                tooltip_security: "Enterprise-grade security for critical code"
+            }
+        };
+
+        // Current language
+        let currentLang = localStorage.getItem('bongx_language') || 'vi';
+
+        // reCAPTCHA handling
+        function onSubmit(token) {
+            // Set the token in the hidden input
+            document.getElementById('recaptchaToken').value = token;
+            
+            // Submit the form
+            document.getElementById('obfuscatorForm').submit();
+        }
+
+        // Initialize reCAPTCHA on form submit
+        document.getElementById('obfuscatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return false;
+            }
+            
+            const loading = document.getElementById('loading');
+            const submitBtn = e.target.querySelector('.btn-primary');
+            
+            // Show loading state
+            loading.style.display = 'block';
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = translations[currentLang].processing_btn;
+            
+            // Execute reCAPTCHA
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LeEc5YrAAAAAFW8gpTYgbDH-SCf3f6mLtB640pA', {action: 'submit'}).then(function(token) {
+                    // Set the token and submit the form
+                    document.getElementById('recaptchaToken').value = token;
+                    document.getElementById('obfuscatorForm').submit();
+                }).catch(function(error) {
+                    // Handle reCAPTCHA error
+                    console.error('reCAPTCHA error:', error);
+                    showNotification(translations[currentLang].error_recaptcha, 'error');
+                    
+                    // Reset form state
+                    loading.style.display = 'none';
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = translations[currentLang].submit_btn;
+                });
+            });
+        });
+
+        // Language switching functionality
+        function switchLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('bongx_language', lang);
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    if (element.tagName === 'INPUT' && element.type === 'text') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update meta tags
+            updateMetaTags(lang);
+            
+            // Show language change notification
+            const message = lang === 'vi' ? 
+                'Đã chuyển sang tiếng Việt' : 
+                'Switched to English';
+            showNotification(message, 'success');
+        }
+
+        // Update meta tags based on language
+        function updateMetaTags(lang) {
+            const metaDesc = document.querySelector('meta[name="description"]');
+            const title = document.querySelector('title');
+            
+            if (lang === 'en') {
+                metaDesc.content = "Bóng X - AI-Powered Python Code Obfuscator and Protection Tool. Secure your Python source code with advanced AI technology, Neural Guard and Anti-Crack features.";
+                title.textContent = "Bóng X - AI-Powered Python Code Protection | Advanced Python Security with AI";
+            } else {
+                metaDesc.content = "Bóng X - Công cụ bảo vệ code Python chuyên nghiệp. Obfuscate và bảo mật source code Python với công nghệ AI tiên tiến.";
+                title.textContent = "Bóng X - AI-Powered Python Code Protection | Bảo vệ Source Code với AI";
+            }
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            switchLanguage(currentLang);
+            
+            // Add event listeners to language buttons
+            document.querySelectorAll('.lang-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    switchLanguage(lang);
+                });
+            });
+            
+            // Initialize reCAPTCHA
+            grecaptcha.ready(function() {
+                console.log('reCAPTCHA ready');
+            });
+        });
+
+        // File upload handler
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const fileNameDisplay = document.getElementById('fileName');
+            
+            if (file) {
+                const fileSize = (file.size / 1024 / 1024).toFixed(2);
+                fileNameDisplay.innerHTML = `<span class="success-icon"></span> <strong>${file.name}</strong> (${fileSize} MB)`;
+                fileNameDisplay.style.display = 'inline-block';
+                
+                // Add success animation
+                fileNameDisplay.style.animation = 'fadeIn 0.5s ease-out';
+                
+                // Show success notification
+                showNotification(translations[currentLang].notification_file_uploaded, 'success');
+            } else {
+                fileNameDisplay.style.display = 'none';
+            }
+        });
+
+        // Download obfuscated file function
+        function downloadObfuscatedFile(code, originalFileName) {
+            const fileName = `bongx-protected-${originalFileName}`;
+            const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            
+            a.href = url;
+            a.download = fileName;
+            a.style.display = 'none';
+            
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            // Show success notification
+            showNotification(translations[currentLang].notification_file_downloaded, 'success');
+        }
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            let gradient = 'var(--primary-gradient)';
+            
+            switch(type) {
+                case 'success':
+                    gradient = 'var(--success-gradient)';
+                    break;
+                case 'error':
+                    gradient = 'var(--danger-gradient)';
+                    break;
+                case 'warning':
+                    gradient = 'linear-gradient(135deg, #ffa726 0%, #ffcc02 100%)';
+                    break;
+            }
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: ${gradient};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 12px;
+                font-weight: 600;
+                z-index: 999;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                animation: slideIn 0.3s ease-out;
+                max-width: 350px;
+                word-wrap: break-word;
+            `;
+            notification.innerHTML = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-out forwards';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 4000);
+        }
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes slideUp {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Enhanced form interactions
+        document.querySelectorAll('.form-control').forEach(element => {
+            element.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+                this.parentElement.style.transition = 'transform 0.3s ease';
+            });
+            
+            element.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Checkbox animations
+        document.querySelectorAll('.checkbox-container').forEach(container => {
+            container.addEventListener('click', function() {
+                const checkbox = this.querySelector('input[type="checkbox"]');
+                const customCheckbox = this.querySelector('.checkbox-custom');
+                
+                if (checkbox.checked) {
+                    customCheckbox.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        customCheckbox.style.transform = 'scale(1)';
+                    }, 150);
+                }
+            });
+        });
+
+        // Form validation enhancement
+        function validateForm() {
+            const username = document.querySelector('input[name="username"]').value.trim();
+            const fileInput = document.querySelector('input[name="file"]');
+            
+            if (!username) {
+                showNotification(translations[currentLang].error_username, 'error');
+                return false;
+            }
+            
+            if (!fileInput.files.length) {
+                showNotification(translations[currentLang].error_file, 'error');
+                return false;
+            }
+            
+            const file = fileInput.files[0];
+            if (!file.name.endsWith('.py')) {
+                showNotification(translations[currentLang].error_file_type, 'error');
+                return false;
+            }
+            
+            if (file.size > 10 * 1024 * 1024) { // 10MB limit
+                showNotification(translations[currentLang].error_file_size, 'error');
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Drag and drop functionality for file upload
+        const fileUploadLabel = document.querySelector('.file-upload-label');
+        const fileInput = document.getElementById('fileInput');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            fileUploadLabel.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileUploadLabel.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileUploadLabel.addEventListener(eventName, unhighlight, false);
+        });
+
+        fileUploadLabel.addEventListener('drop', handleDrop, false);
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function highlight(e) {
+            fileUploadLabel.style.background = 'rgba(102, 126, 234, 0.2)';
+            fileUploadLabel.style.borderColor = 'rgba(102, 126, 234, 1)';
+            fileUploadLabel.style.transform = 'scale(1.02)';
+        }
+
+        function unhighlight(e) {
+            fileUploadLabel.style.background = 'rgba(255, 255, 255, 0.03)';
+            fileUploadLabel.style.borderColor = 'rgba(102, 126, 234, 0.5)';
+            fileUploadLabel.style.transform = 'scale(1)';
+        }
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+
+            if (files.length > 0) {
+                const file = files[0];
+                if (file.name.endsWith('.py')) {
+                    fileInput.files = files;
+                    fileInput.dispatchEvent(new Event('change'));
+                } else {
+                    showNotification(translations[currentLang].error_file_type, 'error');
+                }
+            }
+        }
+
+        // Add tooltips for features based on current language
+        function updateTooltips() {
+            const tooltipKeys = {
+                'AI-Powered': 'tooltip_ai',
+                'Anti-Debug': 'tooltip_antidebug',
+                'Anti-Crack': 'tooltip_anticrack', 
+                'Neural Guard': 'tooltip_neural',
+                'Enterprise Security': 'tooltip_security'
+            };
+
+            document.querySelectorAll('.feature-badge').forEach(badge => {
+                const text = badge.textContent.trim();
+                const tooltipKey = tooltipKeys[text];
+                if (tooltipKey && translations[currentLang][tooltipKey]) {
+                    badge.title = translations[currentLang][tooltipKey];
+                    badge.style.cursor = 'help';
+                }
+            });
+        }
+
+        // Progressive Web App features
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed');
+                    });
+            });
+        }
+
+        // Error handling for form submission
+        window.addEventListener('error', function(e) {
+            console.error('PyHydra Error:', e.error);
+            // showNotification(translations[currentLang].error_general, 'error');
+        });
+
+        // Initialize all features when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add loading animation to initial elements
+            document.querySelectorAll('.form-group').forEach((group, index) => {
+                group.style.animation = `slideUp 0.6s ease-out ${index * 0.1}s both`;
+            });
+
+            // Add focus trap for accessibility
+            const focusableElements = document.querySelectorAll(
+                'button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            
+            if (focusableElements.length > 0) {
+                focusableElements[0].focus();
+            }
+
+            // Update tooltips
+            updateTooltips();
+
+            console.log('Bóng X AI Protection Platform initialized successfully');
+            
+            // Show ready notification after language is set
+            setTimeout(() => {
+                showNotification(translations[currentLang].notification_ready, 'success');
+            }, 500);
+        });
+
+        // Update tooltips when language changes
+        document.addEventListener('languageChanged', updateTooltips);
+    </script>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Bóng X",
+        "description": "AI-Powered Python Code Obfuscator and Protection Tool",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "inLanguage": ["vi", "en"],
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Bóng X"
+        },
+        "datePublished": "2024",
+        "softwareVersion": "2.0",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "200"
+        }
+    }
+    </script>
+</body>
+</html>0
