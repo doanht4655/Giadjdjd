@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PyHydra - Công cụ obfuscate Python mạnh mẽ và bảo mật. Bảo vệ source code Python với công nghệ tiên tiến, hỗ trợ Anti-Debug và Anti-Crack.">
-    <meta name="keywords" content="python obfuscator, code protection, pyhydra, python security, anti-debug, anti-crack, source code protection">
-    <meta name="author" content="Nguyễn Xuân Trịnh">
+    <meta name="description" content="Bóng X - Công cụ bảo vệ code Python chuyên nghiệp. Obfuscate và bảo mật source code Python với công nghệ AI tiên tiến.">
+    <meta name="keywords" content="bóng x, python obfuscator, code protection, python security, anti-debug, anti-crack, source code protection, ai obfuscation">
+    <meta name="author" content="Bóng X Team">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="PyHydra - Advanced Python Code Obfuscator">
-    <meta property="og:description" content="Bảo vệ code Python của bạn với PyHydra - công cụ obfuscate mạnh mẽ nhất">
+    <meta property="og:title" content="Bóng X - AI-Powered Python Code Protection">
+    <meta property="og:description" content="Bảo vệ code Python của bạn với Bóng X - công cụ AI obfuscation thế hệ mới">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://raw.githubusercontent.com/nguyenxuantrinhnotpd/PyHydra/refs/heads/main/pyhydra.jpeg">
     
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PyHydra - Python Code Protection">
-    <meta name="twitter:description" content="Advanced Python obfuscation with anti-debug and anti-crack features">
+    <meta name="twitter:title" content="Bóng X - AI Python Code Protection">
+    <meta name="twitter:description" content="Advanced AI-powered Python obfuscation with next-gen security features">
     
-    <title>PyHydra - Advanced Python Code Obfuscator | Bảo vệ Source Code Python</title>
+    <title>Bóng X - AI-Powered Python Code Protection | Bảo vệ Source Code với AI</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>🐍</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>⚽</text></svg>">
     <link rel="alternate icon" href="https://raw.githubusercontent.com/nguyenxuantrinhnotpd/PyHydra/refs/heads/main/pyhydra.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/nguyenxuantrinhnotpd/PyHydra/refs/heads/main/pyhydra.jpeg">
     
@@ -36,52 +36,95 @@
     <script src="https://www.google.com/recaptcha/api.js?render=6LeEc5YrAAAAAFW8gpTYgbDH-SCf3f6mLtB640pA"></script>
     
     <style>
+        /* Bóng X Brand Colors & Modern Design */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --brand-gradient: linear-gradient(135deg, #ff6b6b 0%, #ffa726 50%, #42a5f5 100%);
+            --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --bg-primary: #0a0e27;
+            --bg-secondary: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 107, 107, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(66, 165, 245, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 167, 38, 0.2) 0%, transparent 50%);
+            z-index: -1;
+            animation: gradientShift 15s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
         .language-switcher {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 1000;
             display: flex;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
             padding: 8px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .lang-btn {
-            padding: 8px 16px;
+            padding: 10px 18px;
             border: none;
             background: transparent;
-            color: rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
             font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         
         .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
         
         .lang-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--brand-gradient);
             color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
         }
         
         .lang-icon {
-            font-size: 16px;
+            font-size: 18px;
         }
 
-        /* Telegram Contact Button */
+        /* Modern Telegram Contact Button */
         .telegram-contact {
             position: fixed;
             left: 20px;
@@ -89,41 +132,64 @@
             z-index: 1000;
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #0088cc 0%, #229ed9 100%);
+            gap: 12px;
+            background: var(--brand-gradient);
             color: white;
-            padding: 12px 20px;
+            padding: 15px 25px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.3);
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .telegram-contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .telegram-contact:hover::before {
+            left: 100%;
         }
 
         .telegram-contact:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0, 136, 204, 0.4);
-            background: linear-gradient(135deg, #229ed9 0%, #0088cc 100%);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
             color: white;
             text-decoration: none;
         }
 
         .telegram-contact:active {
-            transform: translateY(-1px);
+            transform: translateY(-2px) scale(1.02);
         }
 
         .telegram-icon {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            font-size: 16px;
+            font-size: 18px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-5px); }
+            60% { transform: translateY(-3px); }
         }
 
         .telegram-pulse {
@@ -133,8 +199,8 @@
             right: 0;
             bottom: 0;
             border-radius: 50px;
-            background: rgba(0, 136, 204, 0.3);
-            animation: pulse 2s infinite;
+            background: rgba(255, 107, 107, 0.3);
+            animation: pulse 3s infinite;
             pointer-events: none;
         }
 
@@ -144,47 +210,63 @@
                 opacity: 1;
             }
             70% {
-                transform: scale(1.05);
+                transform: scale(1.08);
                 opacity: 0.7;
             }
             100% {
-                transform: scale(1.1);
+                transform: scale(1.15);
                 opacity: 0;
             }
         }
 
-        /* Contact section in main content */
+        /* Modern Contact Section */
         .contact-section {
-            margin-top: 40px;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            margin-top: 50px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--brand-gradient);
+            opacity: 0.1;
+            z-index: -1;
         }
 
         .contact-title {
             color: var(--text-primary);
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            background: var(--primary-gradient);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: var(--brand-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
         }
 
         .contact-description {
             color: var(--text-secondary);
-            margin-bottom: 25px;
-            font-size: 1rem;
-            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 500;
         }
 
         .contact-buttons {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -192,16 +274,17 @@
         .contact-btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 15px 25px;
-            border-radius: 15px;
+            gap: 12px;
+            padding: 18px 30px;
+            border-radius: 25px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
         .contact-btn::before {
@@ -211,7 +294,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.6s;
         }
 
@@ -220,32 +303,34 @@
         }
 
         .contact-btn.telegram {
-            background: linear-gradient(135deg, #0088cc 0%, #229ed9 100%);
+            background: var(--brand-gradient);
             color: white;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
         }
 
         .contact-btn.telegram:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 136, 204, 0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.6);
             color: white;
             text-decoration: none;
         }
 
         .contact-btn.github {
-            background: linear-gradient(135deg, #333 0%, #555 100%);
+            background: linear-gradient(135deg, #24292e 0%, #40464e 100%);
             color: white;
+            box-shadow: 0 8px 25px rgba(36, 41, 46, 0.4);
         }
 
         .contact-btn.github:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(51, 51, 51, 0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(36, 41, 46, 0.6);
             color: white;
             text-decoration: none;
         }
 
         .contact-icon {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -254,6 +339,345 @@
         /* reCAPTCHA badge styling */
         .grecaptcha-badge {
             visibility: hidden;
+        }
+
+        /* Additional styles for external CSS elements */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            font-size: 3rem;
+            filter: drop-shadow(0 4px 20px rgba(255, 107, 107, 0.3));
+        }
+
+        .logo-text {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .features-preview {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .feature-badge {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-badge:hover {
+            background: var(--brand-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: rgba(255, 107, 107, 0.8);
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-container:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .checkbox-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 6px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked + .checkbox-custom {
+            background: var(--brand-gradient);
+            border-color: transparent;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked + .checkbox-custom::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .file-upload {
+            position: relative;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 30px;
+            border: 3px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .file-upload-label:hover {
+            border-color: rgba(255, 107, 107, 0.8);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .upload-icon::before {
+            content: '📁';
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .upload-text {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .upload-hint {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .file-name {
+            margin-top: 15px;
+            padding: 10px;
+            background: var(--success-gradient);
+            color: white;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 18px;
+            background: var(--brand-gradient);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.6);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .result-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .result-success {
+            border-color: rgba(79, 172, 254, 0.6);
+            background: rgba(79, 172, 254, 0.1);
+        }
+
+        .icon {
+            margin-right: 8px;
+        }
+
+        .user-icon::before {
+            content: '👤';
+        }
+
+        .python-icon::before {
+            content: '🐍';
+        }
+
+        .file-icon::before {
+            content: '📄';
+        }
+
+        .success-icon::before {
+            content: '✅';
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 50%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
         }
         
         @media (max-width: 768px) {
@@ -356,14 +780,15 @@
     <div class="container">
         <header class="header">
             <div class="logo">
-                <div class="logo-icon"></div>
-                <h1 class="logo-text">PyHydra</h1>
+                <div class="logo-icon">⚽</div>
+                <h1 class="logo-text">Bóng X</h1>
             </div>
-            <p class="tagline" data-key="tagline">Advanced Python Code Protection & Obfuscation</p>
+            <p class="tagline" data-key="tagline">AI-Powered Python Code Protection & Advanced Obfuscation</p>
             <div class="features-preview">
+                <div class="feature-badge" data-key="feature_ai" title="AI Protection">AI-Powered</div>
                 <div class="feature-badge" data-key="feature_antidebug" title="Debug Protection">Anti-Debug</div>
                 <div class="feature-badge" data-key="feature_anticrack" title="Crack Protection">Anti-Crack</div>
-                <div class="feature-badge" data-key="feature_performance" title="Optimized Performance">High Performance</div>
+                <div class="feature-badge" data-key="feature_neural" title="Neural Network">Neural Guard</div>
                 <div class="feature-badge" data-key="feature_security" title="Enterprise Security">Enterprise Security</div>
             </div>
         </header>
@@ -448,10 +873,11 @@
         // Translation data
         const translations = {
             vi: {
-                tagline: "Advanced Python Code Protection & Obfuscation",
+                tagline: "AI-Powered Python Code Protection & Advanced Obfuscation",
+                feature_ai: "AI-Powered",
                 feature_antidebug: "Anti-Debug",
                 feature_anticrack: "Anti-Crack", 
-                feature_performance: "High Performance",
+                feature_neural: "Neural Guard",
                 feature_security: "Enterprise Security",
                 label_users: "Số người dùng:",
                 label_username: "Tên người dùng:",
@@ -462,30 +888,32 @@
                 anticrack_title: "Anti-Crack + Requests Protection",
                 anticrack_desc: "Bảo vệ khỏi cracking và requests debugging như HTTP-TOOLKIT",
                 label_file: "File Python (.py):",
-                upload_text: "Chọn file Python để bảo vệ",
-                upload_hint: "Hỗ trợ file .py (Max 10MB)",
-                submit_btn: "Bắt đầu bảo vệ code",
-                loading_text: "Đang xử lý và bảo vệ code của bạn...",
-                processing_btn: "Đang xử lý...",
-                notification_ready: "PyHydra đã sẵn sàng để bảo vệ code của bạn!",
+                upload_text: "Chọn file Python để bảo vệ với AI",
+                upload_hint: "Hỗ trợ file .py (Max 10MB) - AI sẽ tối ưu bảo mật",
+                submit_btn: "Bắt đầu bảo vệ với Bóng X AI",
+                loading_text: "AI đang phân tích và bảo vệ code của bạn...",
+                processing_btn: "AI đang xử lý...",
+                notification_ready: "Bóng X AI đã sẵn sàng để bảo vệ code của bạn!",
                 notification_file_uploaded: "File đã được tải lên thành công!",
-                notification_file_downloaded: "File đã được tải xuống thành công!",
+                notification_file_downloaded: "File đã được bảo vệ và tải xuống thành công!",
                 error_username: "Vui lòng nhập tên người dùng",
                 error_file: "Vui lòng chọn file Python",
                 error_file_type: "Chỉ hỗ trợ file .py",
                 error_file_size: "File quá lớn (Max 10MB)",
                 error_general: "Đã xảy ra lỗi. Vui lòng thử lại.",
                 error_recaptcha: "Xác thực reCAPTCHA không thành công. Vui lòng thử lại.",
+                tooltip_ai: "Bảo vệ code bằng công nghệ AI tiên tiến",
                 tooltip_antidebug: "Ngăn chặn việc debug và phân tích code",
                 tooltip_anticrack: "Bảo vệ khỏi việc crack và reverse engineering",
-                tooltip_performance: "Tối ưu hiệu suất, ít ảnh hưởng tốc độ",
+                tooltip_neural: "Sử dụng mạng neural để tối ưu bảo mật",
                 tooltip_security: "Bảo mật cấp doanh nghiệp cho code quan trọng"
             },
             en: {
-                tagline: "Advanced Python Code Protection & Obfuscation",
+                tagline: "AI-Powered Python Code Protection & Advanced Obfuscation",
+                feature_ai: "AI-Powered",
                 feature_antidebug: "Anti-Debug",
                 feature_anticrack: "Anti-Crack",
-                feature_performance: "High Performance", 
+                feature_neural: "Neural Guard", 
                 feature_security: "Enterprise Security",
                 label_users: "Users:",
                 label_username: "Username:",
@@ -496,29 +924,30 @@
                 anticrack_title: "Anti-Crack + Requests Protection",
                 anticrack_desc: "Protect against cracking and requests debugging like HTTP-TOOLKIT",
                 label_file: "Python File (.py):",
-                upload_text: "Choose Python file to protect",
-                upload_hint: "Supports .py files (Max 10MB)",
-                submit_btn: "Start protecting code",
-                loading_text: "Processing and protecting your code...",
-                processing_btn: "Processing...",
-                notification_ready: "PyHydra is ready to protect your code!",
+                upload_text: "Choose Python file to protect with AI",
+                upload_hint: "Supports .py files (Max 10MB) - AI will optimize security",
+                submit_btn: "Start protecting with Bóng X AI",
+                loading_text: "AI is analyzing and protecting your code...",
+                processing_btn: "AI processing...",
+                notification_ready: "Bóng X AI is ready to protect your code!",
                 notification_file_uploaded: "File uploaded successfully!",
-                notification_file_downloaded: "File downloaded successfully!",
+                notification_file_downloaded: "File protected and downloaded successfully!",
                 error_username: "Please enter username",
                 error_file: "Please select Python file",
                 error_file_type: "Only .py files supported",
                 error_file_size: "File too large (Max 10MB)",
                 error_general: "An error occurred. Please try again.",
                 error_recaptcha: "reCAPTCHA verification failed. Please try again.",
+                tooltip_ai: "Protect code with advanced AI technology",
                 tooltip_antidebug: "Prevent debugging and code analysis",
                 tooltip_anticrack: "Protect against cracking and reverse engineering",
-                tooltip_performance: "Optimized performance with minimal speed impact",
+                tooltip_neural: "Use neural networks to optimize security",
                 tooltip_security: "Enterprise-grade security for critical code"
             }
         };
 
         // Current language
-        let currentLang = localStorage.getItem('pyhydra_language') || 'vi';
+        let currentLang = localStorage.getItem('bongx_language') || 'vi';
 
         // reCAPTCHA handling
         function onSubmit(token) {
@@ -567,7 +996,7 @@
         // Language switching functionality
         function switchLanguage(lang) {
             currentLang = lang;
-            localStorage.setItem('pyhydra_language', lang);
+            localStorage.setItem('bongx_language', lang);
             
             // Update HTML lang attribute
             document.documentElement.lang = lang;
@@ -608,11 +1037,11 @@
             const title = document.querySelector('title');
             
             if (lang === 'en') {
-                metaDesc.content = "PyHydra - Advanced Python Code Obfuscator and Protection Tool. Secure your Python source code with advanced technology, Anti-Debug and Anti-Crack features.";
-                title.textContent = "PyHydra - Advanced Python Code Obfuscator | Python Source Code Protection";
+                metaDesc.content = "Bóng X - AI-Powered Python Code Obfuscator and Protection Tool. Secure your Python source code with advanced AI technology, Neural Guard and Anti-Crack features.";
+                title.textContent = "Bóng X - AI-Powered Python Code Protection | Advanced Python Security with AI";
             } else {
-                metaDesc.content = "PyHydra - Công cụ obfuscate Python mạnh mẽ và bảo mật. Bảo vệ source code Python với công nghệ tiên tiến, hỗ trợ Anti-Debug và Anti-Crack.";
-                title.textContent = "PyHydra - Advanced Python Code Obfuscator | Bảo vệ Source Code Python";
+                metaDesc.content = "Bóng X - Công cụ bảo vệ code Python chuyên nghiệp. Obfuscate và bảo mật source code Python với công nghệ AI tiên tiến.";
+                title.textContent = "Bóng X - AI-Powered Python Code Protection | Bảo vệ Source Code với AI";
             }
         }
 
@@ -656,7 +1085,7 @@
 
         // Download obfuscated file function
         function downloadObfuscatedFile(code, originalFileName) {
-            const fileName = `pyhydra-${originalFileName}`;
+            const fileName = `bongx-protected-${originalFileName}`;
             const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -852,9 +1281,10 @@
         // Add tooltips for features based on current language
         function updateTooltips() {
             const tooltipKeys = {
+                'AI-Powered': 'tooltip_ai',
                 'Anti-Debug': 'tooltip_antidebug',
                 'Anti-Crack': 'tooltip_anticrack', 
-                'High Performance': 'tooltip_performance',
+                'Neural Guard': 'tooltip_neural',
                 'Enterprise Security': 'tooltip_security'
             };
 
@@ -906,7 +1336,7 @@
             // Update tooltips
             updateTooltips();
 
-            console.log('PyHydra initialized successfully');
+            console.log('Bóng X AI Protection Platform initialized successfully');
             
             // Show ready notification after language is set
             setTimeout(() => {
@@ -923,8 +1353,8 @@
     {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": "PyHydra",
-        "description": "Advanced Python Code Obfuscator and Protection Tool",
+        "name": "Bóng X",
+        "description": "AI-Powered Python Code Obfuscator and Protection Tool",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Web Browser",
         "inLanguage": ["vi", "en"],
@@ -935,14 +1365,14 @@
         },
         "author": {
             "@type": "Organization",
-            "name": "Bóng x"
+            "name": "Bóng X"
         },
         "datePublished": "2024",
-        "softwareVersion": "1.0",
+        "softwareVersion": "2.0",
         "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "150"
+            "ratingValue": "4.9",
+            "ratingCount": "200"
         }
     }
     </script>
