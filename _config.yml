@@ -1,0 +1,42 @@
+# GitHub Pages Configuration for Bóng X
+title: "Bóng X - AI-Powered Python Code Protection"
+description: "Professional Python code protection with advanced AI technology"
+author: "Bóng X Team"
+url: "https://doanht4655.github.io"
+baseurl: "/Giadjdjd"
+
+# Theme
+theme: minima
+
+# SEO
+lang: vi
+locale: vi_VN
+
+# Social
+social:
+  github: doanht4655
+  telegram: CalceIsMe
+
+# Analytics (optional)
+google_analytics: # Add your GA tracking ID if needed
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Include/Exclude files
+include:
+  - "*.html"
+  - "*.css"
+  - "*.js"
+  - "*.json"
+
+exclude:
+  - .git/
+  - .gitignore
+  - README.md
+  - "*.md"
